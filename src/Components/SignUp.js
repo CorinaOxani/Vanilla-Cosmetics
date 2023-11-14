@@ -14,6 +14,26 @@ export const Signup = () => {
   const [successMSG, setSuccessMsg] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const validatePassword = (password) => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const isLongEnough = password.length >= 8; // example for minimum 8 characters
+  
+    if (!hasUpperCase) return "Password must include at least one uppercase letter.";
+    if (!hasNumber) return "Password must include at least one number.";
+    if (!isLongEnough) return "Password must be at least 8 characters long.";
+    
+    return ""; // returns an empty string if all conditions are met
+  };
+
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+  
+    const validationMessage = validatePassword(newPassword);
+    setErrorMsg(validationMessage); // Update the error message based on validation
+  };
+
   const handleSignup = async (e) => {
     e.preventDefault();
   
@@ -93,7 +113,7 @@ export const Signup = () => {
           type="password"
           className="form-control"
           required
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
           value={password}
         />
         <br />

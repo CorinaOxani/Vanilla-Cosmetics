@@ -76,7 +76,7 @@ const OrderHistory = () => {
     if (user) {
       // Allow cancellation if the current user is an admin or the owner of the order
       if (isAdminUser || user.email === userEmail) {
-        if (window.confirm("Do you really want to cancel this order? Press CANCEL for abort the operation if the answer in NO")) {
+        if (window.confirm("Do you really want to cancel this order? Press CANCEL for abort the operation if the answer is NO")) {
           try {
             const orderDocRef = doc(fs, 'orders', orderId);
             await deleteDoc(orderDocRef);
